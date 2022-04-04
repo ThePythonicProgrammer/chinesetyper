@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width">
+		<title>Chinese Typing Test</title>
+		<link href="style.css" rel="stylesheet" type="text/css">
+
+		<!-- Compiled and minified CSS -->
+    		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	
+	</head>
+  	<body>
+		<div id="parent">	
+			<div id="pre" class="center">
+				<!-- Page Header --!> 
+				<nav>
+    					<div class="nav-wrapper">
+						<a href="#" class="brand-logo">Chinese Test</a>
+						<ul id="nav-mobile" class="right hide-on-med-and-down">
+							<li><a href="#" onclick="randomWords()">Words</a></li>
+							<li><a href="#" onclick="randomChallenge()">Sentences</a></li>
+						</ul>
+					 </div>
+				</nav>
+				<!-- End of Page Header --!>
+			
+
+				<div class="container">
+					<br><br>
+					<p>List of Units</p>
+					<form id="unitList" action="#">
+						<p>
+							<label>
+								<input type="checkbox" />
+								<span>Default</span>
+							</label>
+						</p>
+					</form>
+
+
+					<br><br><br>
+
+					<button class="btn-large waves-effect waves-teal modal-trigger" id="preButton" data-target="modal1" onclick="modalUpdate()">Start the Test!</button>
+					<div id="modal1" class="modal">
+						<div class="modal-content">
+							<h4>Do you want to continue?</h4>
+							<p>You have selected mode <span id="mode"></span> with <span id="charLength"></span> characters.</p>
+						</div>
+						<div class="modal-footer">
+							<a href="#!" class="modal-close waves-effect waves-red btn-flat">Take me back!</a>
+							<a href="#!" class="modal-close waves-effect waves-green btn-flat" onclick="wordTimer()">Continue</a>
+						</div>
+					</div>
+				</div>
+			
+				
+			</div>
+			<div id="test" class="container" style="display:none">
+				<p id="testedWords" style="font-size: 25px;"></p>
+				<br><br>
+				<input id="writingSpace"></input>
+			</div>
+			<div id="stats" style="display:none">
+			
+				<!-- Page Header --!> 
+				<nav>
+    					<div class="nav-wrapper">
+						<a href="#" class="brand-logo">Chinese Test</a>
+						<ul id="nav-mobile" class="right hide-on-med-and-down">
+							<li><a href="#" onclick="randomWords()">Words</a></li>
+							<li><a href="#" onclick="randomChallenge()">Sentences</a></li>
+						</ul>
+					 </div>
+				</nav>
+				<!-- End of Page Header --!>
+
+				<h1 class="center">Your Stats:</h1>
+				
+				<div class="container" id="statsSub">
+					<h3 id ="pf"></h3>
+					<p id="CPM"></p>
+					<p id="time"></p>
+
+					<button class="btn waves-effect waves-teal center" id="replay" onclick="main()">Try Again?</button>
+				</div>
+
+			</div>
+		</div>
+		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    		<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    		<script src="script.js"></script>
+ 	 </body>
+</html>
