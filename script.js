@@ -1,6 +1,9 @@
+
 var challType = ""
 
 main();
+readCharacterSheets();
+
 // window.addEventListener("keydown", wordTimer());
 
 // $(window).bind("load", () => $('.preloader-wrapper').fadeOut(100))
@@ -120,20 +123,32 @@ function modalUpdate(){
 
 function readCharacterSheets(){
 	var xmlhttp = new XMLHttpRequest();
-	var url = "characterFiles/unit1words.json"
+	var url = "https://github.com/ThePythonicProgrammer/chineseTyper/blob/main/characterFiles/words.json"
 
+	// Upon getting access to the files, displayCharacterSheets()
 	xmlhttp.onreadystatechange = () => {
 		if (this.readyState == 4 && this.status == 200) {
 			var data = JSON.parse(this.responseText)
 			for (var i=0; i<data.length;i++){
 				var unit = data[i];
-				console.log(unit)
+				displayCharacterSheets(unit);
 			}
 		}
 	}
 	xmlhttp.open("GET", url, true);
+	
+	// Set request headers
+	xmlhttp.setRequestHeader('X-PINGOTHER', 'pingpong');
+	xmlhttp.setRequestHeader('Content-Type', 'application/json')
+
 	xmlhttp.send()
 
+}
+
+function displayCharacterSheets(data){
+	let p = document.createElement('p');
+	p.innerHTML = `<label><input type="checkbox" /><span>${data.name}</span></label>`
+	form = document.getElementById('unitList');
 }
 
 document.addEventListener('DOMContentLoaded', () =>{
