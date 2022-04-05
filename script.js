@@ -123,7 +123,7 @@ function modalUpdate(){
 
 function readCharacterSheets(){
 	var xmlhttp = new XMLHttpRequest();
-	var url = "https://github.com/ThePythonicProgrammer/chineseTyper/blob/main/characterFiles/words.json"
+	var url = "characterFiles/words.json"
 
 	// Upon getting access to the files, displayCharacterSheets()
 	xmlhttp.onreadystatechange = () => {
