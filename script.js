@@ -123,26 +123,19 @@ function modalUpdate(){
 
 function readCharacterSheets(){
 	var xmlhttp = new XMLHttpRequest();
-	var url = "characterFiles/words.json"
+	var url = "words.json"
 
 	// Upon getting access to the files, displayCharacterSheets()
 	xmlhttp.onreadystatechange = () => {
-		console.log("true")
 		if (this.readyState == 4 && this.status == 200) {
 			var data = JSON.parse(this.responseText)
 			for (var i=0; i<data.length;i++){
 				var unit = data[i];
-				console.log(unit)
 				displayCharacterSheets(unit);
 			}
 		}
 	}
 	xmlhttp.open("GET", url, true);
-	
-	// Set request headers
-	xmlhttp.setRequestHeader('X-PINGOTHER', 'pingpong');
-	xmlhttp.setRequestHeader('Content-Type', 'application/json')
-
 	xmlhttp.send()
 
 }
