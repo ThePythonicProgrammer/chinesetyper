@@ -131,6 +131,7 @@ function readCharacterSheets(){
 			var data = JSON.parse(this.responseText)
 			for (var i=0; i<data.length;i++){
 				var unit = data[i];
+				console.log(unit)
 				displayCharacterSheets(unit);
 			}
 		}
@@ -143,7 +144,7 @@ function readCharacterSheets(){
 function displayCharacterSheets(data){
 	let p = document.createElement('p');
 	p.innerHTML = `<label><input type="checkbox" /><span>${data.name}</span></label>`
-	form = document.getElementById('unitList');
+	document.getElementById('unitList').appendChild(p);
 }
 
 document.addEventListener('DOMContentLoaded', () =>{
