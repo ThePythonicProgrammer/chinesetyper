@@ -226,6 +226,7 @@ function createWordList(){
 
 		if (checkbox.checked){
 			wordList.push(unitWordLists[`unit${i}`])
+			console.log(`Unit ${i} is checked... Adding to wordList`)
 		}
 	}
 }
