@@ -164,6 +164,8 @@ function readCharacterSheets(){
 	var xmlhttp = new XMLHttpRequest();
 	var url = "words.json"
 
+	xmlhttp.open("GET", url, true);
+	
 	// Upon getting access to the files, displayCharacterSheets()
 	xmlhttp.onreadystatechange = () => {
 		if (this.readyState == 4 && this.status == 200) {
@@ -171,7 +173,7 @@ function readCharacterSheets(){
 			console.log(data);
 		}
 	}
-	xmlhttp.open("GET", url, true);
+	
 	xmlhttp.send()
 
 }
