@@ -1,4 +1,7 @@
 
+var pastLen = 0;
+var lastInterval = 0;
+
 var challType = ""
 
 main();
@@ -8,12 +11,14 @@ readCharacterSheets();
 
 // $(window).bind("load", () => $('.preloader-wrapper').fadeOut(100))
 
-
+document.addEventListener('DOMContentLoaded', () =>{
+	var elems = document.querySelectorAll('.modal');
+	var instances = M.Modal.init(elems);
+});
 
 function main(){
 	randomWords();	
 	switchDiv(document.getElementById("parent"), document.getElementById("pre"))
-
 }
 function randomWords() {
   const wordList = ["我", "喜歡", "可是", "最", "你", "門"]
@@ -45,48 +50,72 @@ function wordTimer() {
 	// Calculating Length
 	const length = document.getElementById("testedWords").innerHTML.length;
 
-	var sec = 0;
+	var ms = 0;
 	var CPM = 0;
+	var cpmPerWord = []
+	pastLen = 0;
+	lastInterval = 0;
+
 	var timer = setInterval(function(){
-	    sec++;
-	    complete = checkCompletion(sec);
-	    if (complete == true) {
+		ms += 100
+		checkCompletion(cpmPerWord, ms);
+		console.log(pastLen, lastInterval)
+		
+	    if (pastLen >= length) {
 		clearInterval(timer);
-		CPM = checkCPM(sec);
+		CPM = checkCPM(ms);
 
 		// Setting up stats page
 		switchDiv(document.getElementById("parent"), document.getElementById("stats"))
-	    	document.getElementById("CPM").innerHTML = `You typed at ${CPM} characters a minute!`
-	   	document.getElementById("time").innerHTML = `You took ${sec} seconds to type ${length} characters.`
-	    	
-
+		// document.getElementById("CPM").innerHTML = `You typed at ${CPM} characters a minute!`
+		// document.getElementById("time").innerHTML = `You took ${sec} seconds to type ${length} characters.`
+		
+		plotData(cpmPerWord);
+		
 		var pf = document.getElementById('pf')
 		// Setting up easy grading
 		if (CPM >= 25) {
 			pf.innerHTML = 'Pass!'
 			pf.classList.add('teal')
+			pf.classList.remove('red');
 			pf.style.textAlign = "center";
 		} else {
 			pf.innerHTML = 'Fail :('
 			pf.classList.add('red');
+			pf.classList.remove('teal')
 			pf.style.textAlign = "center"
 		}
 	    }
-	}, 1000);
+	}, 100);
 }
 
-function checkCompletion() {
-  testedWords = document.getElementById("testedWords").innerHTML;
-  written = document.getElementById("writingSpace").value;
+function checkCompletion(array, currentInterval) {
+	testedWords = document.getElementById("testedWords").innerHTML;
+	written = document.getElementById("writingSpace").value;
+	
+	// numCharsPlaced is number of characters the player has "placed"
+	// ttCharPlaced is the time to place a character
+	// ttMin is the amount of time to a minute from the interval (set currently to ms)
+	// CPM is the Characters per Minute
+	let numCharsPlaced;
+	let ttCharPlaced;
+	const ttMin = 60*1000;
+	let CPM;
 
-  // console.log(testCompletion);
-  // console.log(writtenCompletion);
-  
-  if (testedWords.length <= written.length){
-    return true;
-  } else {
-    return false;
-  }
+	// console.log(testCompletion);
+	// console.log(writtenCompletion);
+ 	
+
+	if (written.length > pastLen){
+		numCharsPlaced = written.substring(pastLen).length
+		ttCharPlaced = currentInterval - lastInterval
+		CPM = numCharsPlaced * ttMin / ttCharPlaced	
+
+		array.push(CPM);
+
+		lastInterval = currentInterval
+		pastLen = written.length
+	}
 }
 
 function checkCPM(time){
@@ -101,9 +130,9 @@ function checkCPM(time){
     }
   }
 
-  var CPS = (testedWords.length - incorrect)/time
-  var CPM = CPS * 60
-
+  const CPM = (testedWords.length - incorrect)*60/(time/1000)
+	
+  console.log(CPM)
   return CPM;
 }
 
@@ -147,7 +176,18 @@ function displayCharacterSheets(data){
 	document.getElementById('unitList').appendChild(p);
 }
 
-document.addEventListener('DOMContentLoaded', () =>{
-	var elems = document.querySelectorAll('.modal');
-	var instances = M.Modal.init(elems);
-});
+function plotData(array){
+	var trace1 = {
+	  x: [],
+	  y: [],
+	  type: 'scatter'
+	};
+	
+	array.forEach((v,i) => trace1.x.push(i))
+	array.forEach((v) => trace1.y.push(v))
+
+	var data = [trace1];
+
+	Plotly.newPlot('statsPage', data);
+
+}
