@@ -220,15 +220,14 @@ function displayCharacterSheets(unit, i){
 	console.log("Creating new unit...")
 }
 
-function createWordList(){
+function wordListEventListeners(){
 	for (var i=0; i<units; i++){
 		let checkbox = document.getElementById(`unit${i}`)
-
-		if (checkbox.checked){
-			wordList.push(unitWordLists[`unit${i}`])
-			console.log(`Unit ${i} is checked... Adding to wordList`)
-		}
+		checkbox.addEventListener('click', setWordList)
 	}
+}
+function setWordList(event){
+	console.log(event)
 }
 
 function plotData(array){
