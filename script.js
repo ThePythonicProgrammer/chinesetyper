@@ -3,9 +3,13 @@ var pastLen = 0;
 var lastInterval = 0;
 
 var challType = ""
+var wordList = []
 
-main();
+var units = 0;
+var unitWordLists;
+
 readCharacterSheets();
+main();
 
 // window.addEventListener("keydown", wordTimer());
 
@@ -30,7 +34,7 @@ function main(){
 	})
 }
 function randomWords() {
-  const wordList = ["我", "喜歡", "可是", "最", "你", "門"]
+  createWordList();
   const length = 15
   
   var wordsUsed = ""
@@ -41,6 +45,7 @@ function randomWords() {
   challType = "randomWords"
   document.getElementById('testType').innerText = challType;
   document.getElementById('testedWords').innerHTML = wordsUsed;
+
 }
 
 function randomChallenge(){
@@ -77,6 +82,7 @@ function wordTimer() {
 		clearInterval(timer);
 		CPM = checkCPM(ms, cpmPerWord);
 		
+		wordList = {}
 		// Setting up stats page
 		document.getElementById('writingSpace').autofocus = false
 		switchDiv(document.getElementById("parent"), document.getElementById("stats"))
@@ -201,16 +207,27 @@ function readCharacterSheets(){
 function separateUnits(data){
 	for (var i=0; i<Object.keys(data).length; i++){
 		const unit = data[Object.keys(data)[i]]
-		displayCharacterSheets(unit);
+		displayCharacterSheets(unit, Object.keys(data)[i]);
+		unitWordLists[`unit${i}`] = unit.words	
 
-		console.log(unit)
+		console.log(unit);
 	}
 }
 
-function displayCharacterSheets(unit){
+function displayCharacterSheets(unit, key){
 	let p = document.createElement('p');
-	p.innerHTML = `<label><input type="checkbox" /><span>${unit.name}</span></label>`
+	p.innerHTML = `<label><input type="checkbox" id="${key}/><span>${unit.name}</span></label>`
 	document.getElementById('unitList').appendChild(p);
+}
+
+function createWordList(){
+	for (var i=0; i<units; i++){
+		let checkbox = document.getElementById(`unit${i}`)
+
+		if (checkbox.checked){
+			wordList += unitWordLists[`unit${i}`]
+		}
+	}
 }
 
 function plotData(array){
