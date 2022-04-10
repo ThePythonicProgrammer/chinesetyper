@@ -224,15 +224,14 @@ function displayCharacterSheets(unit, i){
 }
 
 function setWordList(event){
-	const unit = event.target.getAttribute('id')
-	console.log(event.target);
+	const unit = event.target[1].id;
 
 	if (event.target.checked){
-		unitWordLists['unit0'].forEach(v => wordList.push(v));
+		unitWordLists[unit].forEach(v => wordList.push(v));
 		randomWords();
 	} 
 	if (event.target.checked === false){
-		unitWordLists['unit0'].forEach(v => {
+		unitWordLists[unit].forEach(v => {
 			
 			index = wordList.indexOf(v);
 			if (index > -1) {
