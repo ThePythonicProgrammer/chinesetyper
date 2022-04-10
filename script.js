@@ -205,16 +205,16 @@ function readCharacterSheets(){
 function separateUnits(data){
 	for (var i=0; i<Object.keys(data).length; i++){
 		const unit = data[Object.keys(data)[i]]
-		displayCharacterSheets(unit, Object.keys(data)[i]);
+		displayCharacterSheets(unit, i);
 		unitWordLists[`unit${i}`] = unit.words	
 
 		console.log(unit);
 	}
 }
 
-function displayCharacterSheets(unit, key){
+function displayCharacterSheets(unit, i){
 	let p = document.createElement('p');
-	p.innerHTML = `<label><input type="checkbox" id="${key}/><span>${unit.name}</span></label>`
+	p.innerHTML = `<label><input type="checkbox" id="unit${i}/><span>${unit.name}</span></label>`
 	document.getElementById('unitList').appendChild(p);
 }
 
