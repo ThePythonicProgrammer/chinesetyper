@@ -213,7 +213,8 @@ function separateUnits(data){
 
 function displayCharacterSheets(unit, i){
 	let p = document.createElement('p');
-	p.innerHTML = `<label><input type="checkbox" id="unit${i}" onclick="setWordList()"/><span>${unit.name}</span></label>`
+	p.innerHTML = `<label><input type="checkbox" id="unit${i}"/><span>${unit.name}</span></label>`
+	p.onclick = setWordList
 	document.getElementById('unitList').appendChild(p);
 
 	console.log("Creating new unit...")
