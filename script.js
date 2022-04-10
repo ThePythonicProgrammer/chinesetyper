@@ -188,6 +188,8 @@ function readCharacterSheets(){
 			if (status === 0 || status >= 200 && status < 400) {
 				var data = JSON.parse(xmlhttp.responseText);
 				console.log(data);
+
+				separateUnits(data)
 			}
 		}
 	}
@@ -196,9 +198,18 @@ function readCharacterSheets(){
 
 }
 
-function displayCharacterSheets(data){
+function separateUnits(data){
+	for (var i=0; i<Object.keys(data).length; i++){
+		const unit = data[Object.keys(data)[i]]
+		displayCharacterSheets(unit);
+
+		console.log(unit)
+	}
+}
+
+function displayCharacterSheets(unit){
 	let p = document.createElement('p');
-	p.innerHTML = `<label><input type="checkbox" /><span>${data.name}</span></label>`
+	p.innerHTML = `<label><input type="checkbox" /><span>${unit.name}</span></label>`
 	document.getElementById('unitList').appendChild(p);
 }
 
