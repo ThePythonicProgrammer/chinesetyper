@@ -1,5 +1,5 @@
 console.log('Version Info:')
-console.log('Last Updated: 10 Apr 2022 | 5:10 PM')
+console.log('Last Updated: 10 Apr 2022 | 5:43 PM')
 console.log('Last Edited by: Liam Gifford')
 
 var pastLen = 0;
@@ -217,13 +217,14 @@ function separateUnits(data){
 function displayCharacterSheets(unit, i){
 	let p = document.createElement('p');
 	p.innerHTML = `<label><input type="checkbox" id="unit${i}"/><span>${unit.name}</span></label>`
-	p.onclick = setWordList
 	document.getElementById('unitList').appendChild(p);
 
+	document.getElementById(`unit${i}`).onclick = setWordList
 	console.log("Creating new unit...")
 }
 
 function setWordList(event){
+	const unit = event.target.id
 	console.log(event.target)
 
 	if (event.target.checked){
