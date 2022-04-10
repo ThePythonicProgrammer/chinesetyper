@@ -1,5 +1,5 @@
 console.log('Version Info:')
-console.log('Last Updated: 10 Apr 2022 | 11:50 AM')
+console.log('Last Updated: 10 Apr 2022 | 3:44 PM')
 console.log('Last Edited by: Liam Gifford')
 
 var pastLen = 0;
@@ -228,9 +228,9 @@ function setWordList(event){
 	console.log(unit)
 
 	if (event.target.checked){
-		wordList.push(unitWordLists[`${unit}`])
+		wordList.push(unitWordLists['unit0'])
 	} else {
-		unitWordLists[`${unit}`].forEach(v => {
+		unitWordLists['unit0'].forEach(v => {
 			let index = wordList.indexOf(v);
 			if (index > -1){
 				wordList.splice(index, 1);
