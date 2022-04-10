@@ -1,5 +1,5 @@
 console.log('Version Info:')
-console.log('Last Updated: 10 Apr 2022 | 4:04 PM')
+console.log('Last Updated: 10 Apr 2022 | 4:34 PM')
 console.log('Last Edited by: Liam Gifford')
 
 var pastLen = 0;
@@ -40,9 +40,12 @@ function randomWords() {
   const length = 15
   
   var wordsUsed = ""
-  for (var i=0; i<length; i++){
-    var random = Math.random() * wordList.length;
-    wordsUsed += wordList[Math.floor(random)]
+  for (var i=0; i<wordList.length; i++){
+	const lengthPerUnit = length / i
+  	for (var j=0; j<lengthPerUnit; j++) {
+		let random = Math.random() * wordList[i].length;
+		wordsUsed += wordList[i][Math.floor(random)];
+	}
   }
   challType = "randomWords"
   document.getElementById('testType').innerText = challType;
@@ -224,8 +227,8 @@ function displayCharacterSheets(unit, i){
 }
 
 function setWordList(event){
-	const unit = event.target.id
-	console.log(unit)
+	// const unit = event.target.id
+	// console.log(unit)
 
 	if (event.target.checked){
 		wordList.push(unitWordLists['unit0'])
@@ -237,6 +240,7 @@ function setWordList(event){
 		if (index > -1) {
 			wordList.splice(index, 1)
 		}
+		console.log(wordList)
 		randomWords();
 	}
 }
