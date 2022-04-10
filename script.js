@@ -11,6 +11,8 @@ var wordList = []
 var units = 0;
 var unitWordLists = {}
 
+unitsUsed = []
+
 readCharacterSheets();
 main();
 
@@ -91,6 +93,7 @@ function wordTimer() {
 		// document.getElementById("CPM").innerHTML = `You typed at ${CPM} characters a minute!`
 		// document.getElementById("time").innerHTML = `You took ${sec} seconds to type ${length} characters.`
 		
+		document.getElementById('testedSets').innerText = unitsUsed
 		plotData(cpmPerWord);
 	
 		var pf = document.getElementById('pf')
@@ -229,6 +232,7 @@ function setWordList(event){
 
 	if (event.target.checked){
 		unitWordLists[unit].forEach(v => wordList.push(v));
+		unitsUsed.append(event.target.innerText)
 		randomWords();
 	} 
 	if (event.target.checked === false){
@@ -239,6 +243,11 @@ function setWordList(event){
 				wordList.splice(index, 1)
 			}
 		})
+
+		const removeUsed = unitsUsed.indexOf(event.target.innerText);
+		if (removeUsed > -1) {
+			wordList.splice(removeUsed, 1)
+		}
 		randomWords()
 	}
 }
