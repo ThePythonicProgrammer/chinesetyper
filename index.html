@@ -60,7 +60,7 @@
 			<div id="test" class="container" style="display:none">
 				<p id="testedWords" style="font-size: 25px;"></p>
 				<br><br>
-				<form autocomplete="off">
+				<form autocomplete="off" id="testForm">
 					<input autocomplete="false" name="hidden" type="text" style="display:none;">
 					<input id="writingSpace"></input>
 				</form>
@@ -82,18 +82,24 @@
 				<h1 class="center">Your Stats:</h1>
 				
 				<div class="container" id="statsSub">
+					
 					<h3 id ="pf"></h3>
 					
+					<p>Test Type: <span id="testType"></span></p>
+					
+					<p>Below is a graph of your raw CPM (Characters Per Minute) across every word you typed.</p>	
+
 					<div id="statsPage" style="width:600px;height:250px;"></div>
 
-					<p id="CPM"></p>
-					<p id="time"></p>
+					<p>Raw CPM: <span id="RAWCPM"></span> Characters Per Minute</p>
+					<p>True CPM: <span id="CPM"></span> Characters Per Minute</p>
+					<p>Testing Time: <span id="time"></span> seconds</p>
 
 					<button class="btn waves-effect waves-teal center" id="replay" onclick="main()">Try Again?</button>
 				</div>
 
 			</div>
-			<div id="load">
+			<div id="load" style="display:none;">
 				
 				<!-- Page Header --!> 
 				<nav>

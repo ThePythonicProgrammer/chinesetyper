@@ -30,6 +30,7 @@ function randomWords() {
     wordsUsed += wordList[Math.floor(random)]
   }
   challType = "randomWords"
+  document.getElementById('testType').innerText = challType;
   document.getElementById('testedWords').innerHTML = wordsUsed;
 }
 
@@ -40,6 +41,7 @@ function randomChallenge(){
   console.log(challNum);
   
   document.getElementById("testedWords").innerHTML = challenges[challNum]
+  document.getElementById('testType').innerText = challType;
   challType = "randomChallenge"
 }
 
@@ -59,11 +61,10 @@ function wordTimer() {
 	var timer = setInterval(function(){
 		ms += 100
 		checkCompletion(cpmPerWord, ms);
-		console.log(pastLen, lastInterval)
 		
 	    if (pastLen >= length) {
 		clearInterval(timer);
-		CPM = checkCPM(ms);
+		CPM = checkCPM(ms, cpmPerWord);
 
 		// Setting up stats page
 		switchDiv(document.getElementById("parent"), document.getElementById("stats"))
@@ -71,7 +72,7 @@ function wordTimer() {
 		// document.getElementById("time").innerHTML = `You took ${sec} seconds to type ${length} characters.`
 		
 		plotData(cpmPerWord);
-		
+	
 		var pf = document.getElementById('pf')
 		// Setting up easy grading
 		if (CPM >= 25) {
@@ -118,12 +119,14 @@ function checkCompletion(array, currentInterval) {
 	}
 }
 
-function checkCPM(time){
+function checkCPM(time, cpmArray){
   written = document.getElementById("writingSpace").value;
   testedWords = document.getElementById("testedWords").innerHTML;
 
   var incorrect = 0;
-  
+  let cpmSum = 0;
+  let cpmAvg = 0;
+
   for (var i=0; i<testedWords.length; i++){
     if (testedWords.substring(i) != written.substring(i)){
       incorrect++;
@@ -132,7 +135,14 @@ function checkCPM(time){
 
   const CPM = (testedWords.length - incorrect)*60/(time/1000)
 	
-  console.log(CPM)
+  document.getElementById('CPM').innerText = CPM;
+  document.getElementById('time').innerText = time/1000 
+  document.getElementById('testForm').reset();  
+
+  cpmArray.forEach((v) => cpmSum += v)
+  cpmAvg = cpmSum / cpmArray.length;
+  document.getElementById('RAWCPM').innerText = cpmAvg
+
   return CPM;
 }
 
@@ -158,11 +168,7 @@ function readCharacterSheets(){
 	xmlhttp.onreadystatechange = () => {
 		if (this.readyState == 4 && this.status == 200) {
 			var data = JSON.parse(this.responseText)
-			for (var i=0; i<data.length;i++){
-				var unit = data[i];
-				console.log(unit)
-				displayCharacterSheets(unit);
-			}
+			console.log(data);
 		}
 	}
 	xmlhttp.open("GET", url, true);
@@ -187,7 +193,17 @@ function plotData(array){
 	array.forEach((v) => trace1.y.push(v))
 
 	var data = [trace1];
+	
+	var layout = {
+		title: "Raw CPM Across Typing Challenge",
+		xaxis: {
+			title: "CPM"
+		},
+		yaxis: {
+			title: "Word Count"
+		}
+	}
 
-	Plotly.newPlot('statsPage', data);
+	Plotly.newPlot('statsPage', data, layout);
 
 }
