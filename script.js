@@ -1,5 +1,5 @@
 console.log('Version Info:')
-console.log('Last Updated: 10 Apr 2022 | 4:38 PM')
+console.log('Last Updated: 10 Apr 2022 | 4:42 PM')
 console.log('Last Edited by: Liam Gifford')
 
 var pastLen = 0;
@@ -228,7 +228,7 @@ function setWordList(event){
 	// console.log(unit)
 
 	if (event.target.checked){
-		wordList.push(unitWordLists['unit0'].forEach(v => v))
+		unitWordLists['unit0'].forEach(v => wordList.push(v));
 		console.log(wordList);
 		randomWords();
 	} else {
