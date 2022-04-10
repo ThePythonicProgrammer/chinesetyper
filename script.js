@@ -186,11 +186,9 @@ function readCharacterSheets(){
 		if (xmlhttp.readyState === XMLHttpRequest.DONE) {
 			var status = xmlhttp.status
 			if (status === 0 || status >= 200 && status < 400) {
-				console.log(xmlhttp.responseText)
+				var data = JSON.parse(xmlhttp.responseText);
+				console.log(data[0]);
 			}
-
-			// var data = JSON.parse(this.responseText)
-			// console.log(data);
 		}
 	}
 	
