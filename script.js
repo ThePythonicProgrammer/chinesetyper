@@ -229,6 +229,7 @@ function setWordList(event){
 
 	if (event.target.checked){
 		wordList.push(unitWordLists['unit0'])
+		console.log(wordList);
 	} else {
 		unitWordLists['unit0'].forEach(v => {
 			let index = wordList.indexOf(v);
