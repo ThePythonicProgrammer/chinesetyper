@@ -34,7 +34,7 @@ function main(){
 	})
 }
 function randomWords() {
-  // createWordList();
+  createWordList();
   const length = 15
   
   var wordsUsed = ""
@@ -214,7 +214,7 @@ function separateUnits(data){
 
 function displayCharacterSheets(unit, i){
 	let p = document.createElement('p');
-	p.innerHTML = `<label><input type="checkbox"/><span>${unit.name}</span></label>`
+	p.innerHTML = `<label><input type="checkbox" id="unit${i}"/><span>${unit.name}</span></label>`
 	document.getElementById('unitList').appendChild(p);
 
 	console.log("Creating new unit...")
