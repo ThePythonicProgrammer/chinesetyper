@@ -187,7 +187,7 @@ function readCharacterSheets(){
 			var status = xmlhttp.status
 			if (status === 0 || status >= 200 && status < 400) {
 				var data = JSON.parse(xmlhttp.responseText);
-				console.log(data[0]);
+				console.log(data);
 			}
 		}
 	}
