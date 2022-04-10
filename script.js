@@ -34,7 +34,6 @@ function main(){
 	})
 }
 function randomWords() {
-  createWordList();
   const length = 15
   
   var wordsUsed = ""
