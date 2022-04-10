@@ -168,9 +168,14 @@ function readCharacterSheets(){
 	
 	// Upon getting access to the files, displayCharacterSheets()
 	xmlhttp.onreadystatechange = () => {
-		if (this.readyState == 4 && this.status == 200) {
-			var data = JSON.parse(this.responseText)
-			console.log(data);
+		if (xmlhttp.readyState === XMLHttpRequest.DONE) {
+			var status = xhr.status
+			if (status === 0 || status >= 200 && status < 400) {
+				console.log(xhr.responseText)
+			}
+
+			// var data = JSON.parse(this.responseText)
+			// console.log(data);
 		}
 	}
 	
