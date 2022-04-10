@@ -221,7 +221,18 @@ function displayCharacterSheets(unit, i){
 }
 
 function setWordList(event){
-	console.log(event)
+	const unit = event.target.id
+	
+	if (event.target.checked){
+		wordList.push(unitWordLists[unit])
+	} else {
+		unitWordLists[unit].forEach(v => {
+			let index = wordList.indexOf(v);
+			if (index > -1){
+				wordList.splice(index, 1);
+			}
+		})
+	}
 }
 
 function plotData(array){
