@@ -213,18 +213,12 @@ function separateUnits(data){
 
 function displayCharacterSheets(unit, i){
 	let p = document.createElement('p');
-	p.innerHTML = `<label><input type="checkbox" id="unit${i}"/><span>${unit.name}</span></label>`
+	p.innerHTML = `<label><input type="checkbox" id="unit${i}" onclick="setWordList()"/><span>${unit.name}</span></label>`
 	document.getElementById('unitList').appendChild(p);
 
 	console.log("Creating new unit...")
 }
 
-function wordListEventListeners(){
-	for (var i=0; i<units; i++){
-		let checkbox = document.getElementById(`unit${i}`)
-		checkbox.addEventListener('click', setWordList)
-	}
-}
 function setWordList(event){
 	console.log(event)
 }
