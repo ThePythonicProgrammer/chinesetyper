@@ -34,7 +34,7 @@ function main(){
 	})
 }
 function randomWords() {
-  createWordList();
+  // createWordList();
   const length = 15
   
   var wordsUsed = ""
@@ -193,8 +193,6 @@ function readCharacterSheets(){
 			var status = xmlhttp.status
 			if (status === 0 || status >= 200 && status < 400) {
 				var data = JSON.parse(xmlhttp.responseText);
-				console.log(data);
-
 				separateUnits(data)
 			}
 		}
@@ -225,7 +223,7 @@ function createWordList(){
 		let checkbox = document.getElementById(`unit${i}`)
 
 		if (checkbox.checked){
-			wordList += unitWordLists[`unit${i}`]
+			wordList.push(unitWordLists[`unit${i}`])
 		}
 	}
 }
