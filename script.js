@@ -1,5 +1,5 @@
 console.log('Version Info:')
-console.log('Last Updated: 10 Apr 2022 | 4:34 PM')
+console.log('Last Updated: 10 Apr 2022 | 4:38 PM')
 console.log('Last Edited by: Liam Gifford')
 
 var pastLen = 0;
@@ -40,12 +40,9 @@ function randomWords() {
   const length = 15
   
   var wordsUsed = ""
-  for (var i=0; i<wordList.length; i++){
-	const lengthPerUnit = length / i
-  	for (var j=0; j<lengthPerUnit; j++) {
-		let random = Math.random() * wordList[i].length;
-		wordsUsed += wordList[i][Math.floor(random)];
-	}
+  for (var i=0; i<length; i++){
+    var random = Math.random() * wordList.length;
+    wordsUsed += wordList[Math.floor(random)]
   }
   challType = "randomWords"
   document.getElementById('testType').innerText = challType;
@@ -231,7 +228,7 @@ function setWordList(event){
 	// console.log(unit)
 
 	if (event.target.checked){
-		wordList.push(unitWordLists['unit0'])
+		wordList.push(unitWordLists['unit0'].forEach(v => v))
 		console.log(wordList);
 		randomWords();
 	} else {
