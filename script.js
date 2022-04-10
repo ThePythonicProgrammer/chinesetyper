@@ -19,6 +19,7 @@ document.addEventListener('DOMContentLoaded', () =>{
 function main(){
 	randomWords();	
 	switchDiv(document.getElementById("parent"), document.getElementById("pre"))
+	document.getElementById('writingSpace').autofocus = true;
 	document.getElementById('writingSpace').onpaste = e => {
 		e.preventDefault();
 		return false;
@@ -56,7 +57,6 @@ function randomChallenge(){
 function wordTimer() {
 
 	switchDiv(document.getElementById("parent"), document.getElementById("test"));
-	document.getElementById('writingSpace').autofocus = true;
 
 	// Calculating Length
 	const length = document.getElementById("testedWords").innerHTML.length;
@@ -66,17 +66,19 @@ function wordTimer() {
 	var cpmPerWord = []
 	pastLen = 0;
 	lastInterval = 0;
+	var leftBool = true;
 
 	var timer = setInterval(function(){
 		ms += 100
 		checkCompletion(cpmPerWord, ms);
-		preventLeave();
+		leftBool = preventLeave();
 	    if (pastLen >= length) {
+		console.log("Done!")
 		clearInterval(timer);
 		CPM = checkCPM(ms, cpmPerWord);
 		
 		// Setting up stats page
-		document.getElementById('writingSpace').autofocus = false;
+		document.getElementById('writingSpace').autofocus = false
 		switchDiv(document.getElementById("parent"), document.getElementById("stats"))
 		// document.getElementById("CPM").innerHTML = `You typed at ${CPM} characters a minute!`
 		// document.getElementById("time").innerHTML = `You took ${sec} seconds to type ${length} characters.`
@@ -97,6 +99,9 @@ function wordTimer() {
 			pf.style.textAlign = "center"
 		}
 	    }
+		if (leftBool = false) {
+			clearInterval(timer);
+		}
 	}, 100);
 }
 
@@ -179,9 +184,9 @@ function readCharacterSheets(){
 	// Upon getting access to the files, displayCharacterSheets()
 	xmlhttp.onreadystatechange = () => {
 		if (xmlhttp.readyState === XMLHttpRequest.DONE) {
-			var status = xhr.status
+			var status = xmlhttp.status
 			if (status === 0 || status >= 200 && status < 400) {
-				console.log(xhr.responseText)
+				console.log(xmlhttp.responseText)
 			}
 
 			// var data = JSON.parse(this.responseText)
@@ -214,10 +219,10 @@ function plotData(array){
 	var layout = {
 		title: "Raw CPM Across Typing Challenge",
 		xaxis: {
-			title: "CPM"
-		},
-		yaxis: {
 			title: "Word Count"
+		},
+		yaxis: {	
+			title: "CPM"
 		}
 	}
 
@@ -227,9 +232,8 @@ function plotData(array){
 
 function preventLeave(){
 	document.getElementById('writingSpace').onblur = () => {
-		clearInterval(timer);
-		document.getElementById('writingSpace').autofocus = false;
 		switchDiv(document.getElementById("parent"), document.getElementById("pre"))
-
+		document.getElementById('testForm').reset()
+		return false;
 	}
 }
