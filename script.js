@@ -1,5 +1,5 @@
 console.log('Version Info:')
-console.log('Last Updated: 10 Apr 2022 | 5:08 PM')
+console.log('Last Updated: 10 Apr 2022 | 5:10 PM')
 console.log('Last Edited by: Liam Gifford')
 
 var pastLen = 0;
@@ -224,7 +224,7 @@ function displayCharacterSheets(unit, i){
 }
 
 function setWordList(event){
-	const unit = event.target[1].id;
+	console.log(event.target)
 
 	if (event.target.checked){
 		unitWordLists[unit].forEach(v => wordList.push(v));
