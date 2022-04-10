@@ -228,9 +228,9 @@ function setWordList(event){
 	console.log(unit)
 
 	if (event.target.checked){
-		wordList.push(unitWordLists[unit])
+		wordList.push(unitWordLists[`${unit}`])
 	} else {
-		unitWordLists[unit].forEach(v => {
+		unitWordLists[`${unit}`].forEach(v => {
 			let index = wordList.indexOf(v);
 			if (index > -1){
 				wordList.splice(index, 1);
