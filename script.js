@@ -6,7 +6,7 @@ var challType = ""
 var wordList = []
 
 var units = 0;
-var unitWordLists;
+var unitWordLists = {}
 
 readCharacterSheets();
 main();
