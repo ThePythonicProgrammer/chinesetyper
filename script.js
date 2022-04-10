@@ -19,6 +19,14 @@ document.addEventListener('DOMContentLoaded', () =>{
 function main(){
 	randomWords();	
 	switchDiv(document.getElementById("parent"), document.getElementById("pre"))
+	document.getElementById('writingSpace').onpaste = e => {
+		e.preventDefault();
+		return false;
+	}
+	document.getElementById('testedWords').addEventListener('copy', (event) => {
+		event.preventDefault();
+		return false;
+	})
 }
 function randomWords() {
   const wordList = ["我", "喜歡", "可是", "最", "你", "門"]
@@ -48,6 +56,7 @@ function randomChallenge(){
 function wordTimer() {
 
 	switchDiv(document.getElementById("parent"), document.getElementById("test"));
+	document.getElementById('writingSpace').autofocus = true;
 
 	// Calculating Length
 	const length = document.getElementById("testedWords").innerHTML.length;
@@ -61,12 +70,13 @@ function wordTimer() {
 	var timer = setInterval(function(){
 		ms += 100
 		checkCompletion(cpmPerWord, ms);
-		
+		preventLeave();
 	    if (pastLen >= length) {
 		clearInterval(timer);
 		CPM = checkCPM(ms, cpmPerWord);
-
+		
 		// Setting up stats page
+		document.getElementById('writingSpace').autofocus = false;
 		switchDiv(document.getElementById("parent"), document.getElementById("stats"))
 		// document.getElementById("CPM").innerHTML = `You typed at ${CPM} characters a minute!`
 		// document.getElementById("time").innerHTML = `You took ${sec} seconds to type ${length} characters.`
@@ -213,4 +223,13 @@ function plotData(array){
 
 	Plotly.newPlot('statsPage', data, layout);
 
+}
+
+function preventLeave(){
+	document.getElementById('writingSpace').onblur = () => {
+		clearInterval(timer);
+		document.getElementById('writingSpace').autofocus = false;
+		switchDiv(document.getElementById("parent"), document.getElementById("pre"))
+
+	}
 }
