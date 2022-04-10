@@ -225,7 +225,7 @@ function displayCharacterSheets(unit, i){
 
 function setWordList(event){
 	const unit = event.target.getAttribute('id')
-	console.log(unit)
+	console.log(event.target);
 
 	if (event.target.checked){
 		unitWordLists['unit0'].forEach(v => wordList.push(v));
