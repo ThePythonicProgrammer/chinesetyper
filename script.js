@@ -26,7 +26,6 @@ document.addEventListener('DOMContentLoaded', () =>{
 });
 
 function main(){
-	randomWords();	
 	switchDiv(document.getElementById("parent"), document.getElementById("pre"))
 	document.getElementById('writingSpace').autofocus = true;
 	document.getElementById('writingSpace').onpaste = e => {
@@ -182,6 +181,9 @@ function switchDiv(parentDiv, div){
 }
 
 function modalUpdate(){
+	if (wordList.length == 0) {
+		document.getElementById('warning').display = 'block' 
+	}
 	document.getElementById('mode').innerHTML = challType;
 	document.getElementById('charLength').innerHTML = document.getElementById('testedWords').innerHTML.length;
 }

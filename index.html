@@ -31,14 +31,7 @@
 					<br><br>
 					<p>List of Units</p>
 					<form id="unitList" action="#">
-						<p>
-							<label>
-								<input type="checkbox" />
-								<span>Default</span>
-							</label>
-						</p>
 					</form>
-
 
 					<br><br><br>
 
@@ -47,6 +40,7 @@
 						<div class="modal-content">
 							<h4>Do you want to continue?</h4>
 							<p>You have selected mode <span id="mode"></span> with <span id="charLength"></span> characters.</p>
+							<p id="warning" style="display:none;">WARNING! You have not selected a unit. The test will not work correctly.</p>
 						</div>
 						<div class="modal-footer">
 							<a href="#!" class="modal-close waves-effect waves-red btn-flat">Take me back!</a>
@@ -57,7 +51,7 @@
 			
 				
 			</div>
-			<div id="test" class="container" style="display:none">
+			<div id="test" class="container" style="display:none;">
 				
 				<p id="testedWords" style="font-size: 25px;"></p>
 				<br><br>
