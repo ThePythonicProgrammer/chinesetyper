@@ -1,5 +1,5 @@
 console.log('Version Info:')
-console.log('Last Updated: 10 Apr 2022 | 5:57 PM')
+console.log('Last Updated: 10 Apr 2022 | 9:36 PM')
 console.log('Last Edited by: Liam Gifford')
 
 var pastLen = 0;
@@ -13,7 +13,7 @@ var unitWordLists = {}
 
 unitsUsed = []
 
-readCharacterSheets();
+readYAMLCharacterSheets();
 main();
 
 // window.addEventListener("keydown", wordTimer());
@@ -200,6 +200,28 @@ function readCharacterSheets(){
 			var status = xmlhttp.status
 			if (status === 0 || status >= 200 && status < 400) {
 				var data = JSON.parse(xmlhttp.responseText);
+				separateUnits(data)
+			}
+		}
+	}
+	
+	xmlhttp.send()
+
+}
+
+function readYAMLCharacterSheets(){
+
+	var xmlhttp = new XMLHttpRequest();
+	var url = "words.yaml"
+
+	xmlhttp.open("GET", url, true);
+	
+	// Upon getting access to the files, displayCharacterSheets()
+	xmlhttp.onreadystatechange = () => {
+		if (xmlhttp.readyState === XMLHttpRequest.DONE) {
+			var status = xmlhttp.status
+			if (status === 0 || status >= 200 && status < 400) {
+				var data = yaml.load(xmlhttp.responseText);
 				separateUnits(data)
 			}
 		}
