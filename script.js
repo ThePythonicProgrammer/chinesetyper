@@ -181,7 +181,7 @@ function switchDiv(parentDiv, div){
 }
 
 function modalUpdate(){
-	if (wordList.length == 0) {
+	if (wordList.length < 1) {
 		document.getElementById('warning').display = 'block' 
 	}
 	document.getElementById('mode').innerHTML = challType;
