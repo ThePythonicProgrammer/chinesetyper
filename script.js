@@ -212,8 +212,6 @@ function separateUnits(data){
 		const unit = data[Object.keys(data)[i]]
 		displayCharacterSheets(unit, i);
 		unitWordLists[`unit${i}`] = unit.words	
-
-		console.log(unit);
 	}
 }
 
@@ -228,11 +226,10 @@ function displayCharacterSheets(unit, i){
 
 function setWordList(event){
 	const unit = event.target.id
-	console.log(event.target)
 
 	if (event.target.checked){
 		unitWordLists[unit].forEach(v => wordList.push(v));
-		unitsUsed.append(event.target.innerText)
+		unitsUsed.push(event.target.innerText)
 		randomWords();
 	} 
 	if (event.target.checked === false){
